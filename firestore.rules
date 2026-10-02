@@ -35,58 +35,67 @@ service cloud.firestore {
 
     // CBT Configuration
     match /cbt_config/{configId} {
-      allow read, write: if isValidId(configId) && isValidConfig(incoming());
+      allow read: if isValidId(configId);
+      allow create, update: if isValidId(configId) && isValidConfig(incoming());
       allow delete: if isValidId(configId);
     }
 
     match /cbt_configs/{configId} {
-      allow read, write: if isValidId(configId) && isValidConfig(incoming());
+      allow read: if isValidId(configId);
+      allow create, update: if isValidId(configId) && isValidConfig(incoming());
       allow delete: if isValidId(configId);
     }
 
     // Student Results
     match /student_results/{resultId} {
-      allow read, write: if isValidId(resultId) && isValidStudentResult(incoming());
+      allow read: if isValidId(resultId);
+      allow create, update: if isValidId(resultId) && isValidStudentResult(incoming());
       allow delete: if isValidId(resultId);
     }
 
     match /cbt_results/{resultId} {
-      allow read, write: if isValidId(resultId) && isValidStudentResult(incoming());
+      allow read: if isValidId(resultId);
+      allow create, update: if isValidId(resultId) && isValidStudentResult(incoming());
       allow delete: if isValidId(resultId);
     }
 
     // Teacher Accounts
     match /teacher_accounts/{teacherId} {
-      allow read, write: if isValidId(teacherId) && isValidTeacher(incoming());
+      allow read: if isValidId(teacherId);
+      allow create, update: if isValidId(teacherId) && isValidTeacher(incoming());
       allow delete: if isValidId(teacherId);
     }
 
     match /cbt_teachers/{teacherId} {
-      allow read, write: if isValidId(teacherId) && isValidTeacher(incoming());
+      allow read: if isValidId(teacherId);
+      allow create, update: if isValidId(teacherId) && isValidTeacher(incoming());
       allow delete: if isValidId(teacherId);
     }
 
     // Admin Accounts
     match /admin_accounts/{adminId} {
-      allow read, write: if isValidId(adminId) && isValidAdmin(incoming());
+      allow read: if isValidId(adminId);
+      allow create, update: if isValidId(adminId) && isValidAdmin(incoming());
       allow delete: if isValidId(adminId);
     }
 
     match /cbt_admins/{adminId} {
-      allow read, write: if isValidId(adminId) && isValidAdmin(incoming());
+      allow read: if isValidId(adminId);
+      allow create, update: if isValidId(adminId) && isValidAdmin(incoming());
       allow delete: if isValidId(adminId);
     }
 
     // Student Master Data
     match /cbt_students/{studentId} {
-      allow read, write: if isValidId(studentId) && isValidStudent(incoming());
+      allow read: if isValidId(studentId);
+      allow create, update: if isValidId(studentId) && isValidStudent(incoming());
       allow delete: if isValidId(studentId);
     }
 
     // Broadcasts / Alerts
     match /cbt_broadcasts/{broadcastId} {
-      allow read, write: if isValidId(broadcastId);
-      allow delete: if isValidId(broadcastId);
+      allow read: if isValidId(broadcastId);
+      allow create, update, delete: if isValidId(broadcastId);
     }
 
     // Default deny for unmapped collections
